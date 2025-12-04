@@ -73,6 +73,8 @@ export default {
         }
 
         this.hourlyData = hourly.forecast.forecastday[0].hour
+        window.hourlyForecast = this.hourlyData
+
         this.fiveDayForecast = fiveDay.forecast.forecastday
 
         // For now we'll just log them; later used by HourlyView/FiveDayView
