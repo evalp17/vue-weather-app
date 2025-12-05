@@ -1,5 +1,6 @@
 <template>
   <section v-if="weather" :class="['weather-dashboard', backgroundClass]">
+  <div class="weather-content">
     <h2>{{ weather.locationName }}</h2>
     <p class="current-temp">{{ Math.round(weather.currentTemp) }}°</p>
 
@@ -12,11 +13,13 @@
       <img v-if="weather.iconUrl" :src="weather.iconUrl" alt="" />
       {{ weather.condition }}
     </p>
-  </section>
+  </div>
+</section>
 
-  <section v-else class="weather-dashboard empty">
-    <p>Search for a location to see the current weather.</p>
-  </section>
+<section v-else class="weather-dashboard empty">
+  <p>Search for a location to see the current weather.</p>
+</section>
+
 </template>
 
 <script>
@@ -44,13 +47,38 @@ export default {
 
 <style scoped>
 .weather-dashboard {
+  position: relative;        /* make positioning inside possible */
   padding: 1rem;
   border-radius: 8px;
   color: #ffffff;
   margin-bottom: 1rem;
-  min-height: 200px;            /* so the background image is visible */
-  background-size: cover;       /* scale image to fill */
-  background-position: center;  /* center the image */
+  min-height: 200px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;   /* center the box horizontally */
+  align-items: center;       /* center it vertically */
+  text-align: center;
+}
+
+/* New: the overlay box behind text */
+.weather-content {
+  background-color: rgba(0, 0, 0, 0.55);  /* semi-transparent black */
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  max-width: 80%;
+}
+
+/* Existing classes can stay as-is, or tweak them */
+.current-temp {
+  font-size: 2.5rem;
+  margin: 0.5rem 0;
+}
+
+.condition img {
+  width: 32px;
+  vertical-align: middle;
+  margin-right: 0.3rem;
 }
 
 /* Each of these now uses a background image instead of a gradient */
